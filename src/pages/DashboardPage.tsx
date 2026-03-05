@@ -4,23 +4,46 @@ import { Link } from "react-router-dom"
 
 export const DashboardPage = () => {
 
-    const [ingresosMensual, setIngresosMensual] = useState("")
-    const [gastosMensual, setGastosMensual] = useState("")
+    const [ingresosMensual, setIngresosMensual] = useState<number>()
+    const [gastosMensual, setGastosMensual] = useState<number>()
     const [categoria, setCategoria] = useState("")
     const [descripcion, setDescripcion] = useState("")
     const [date, setDate] = useState("")
 
-   
+    const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const movimiento = {
+            ingresosMensual,
+            gastosMensual,
+            categoria,
+            descripcion,
+            date,
+        }
+
+        const movimientosGuardados = localStorage.getItem("movimientos")
+
+        const movimientos = movimientosGuardados
+         ? JSON.parse(movimientosGuardados)
+         : []
+
+         localStorage.setItem("movimientos", JSON.stringify(movimientos))
+
+         console.log("Movimiento guardado:", movimiento );
+            
+    }
+
+
     return (
         <div className="dashboard-container">
-            <form className="dashboard-form">
+            <form className="dashboard-form" onSubmit={handleSubmit}>
                 <h2>Agregar movimiento</h2>
                 <label>Monto Ingresos</label>
                 <input
                     type="number"
                     value={ingresosMensual}
                     placeholder="Ingresos mensual"
-                    onChange={event => setIngresosMensual(event.target.value)}
+                    onChange={event => setIngresosMensual(Number(event.target.value))}
                     required
                 />
                 <label>Monto Gastos</label>
@@ -28,7 +51,7 @@ export const DashboardPage = () => {
                     type="number"
                     value={gastosMensual}
                     placeholder="Gastos mensual"
-                    onChange={event => setGastosMensual(event.target.value)}
+                    onChange={event => setGastosMensual(Number(event.target.value))}
                     required
                 />
                 <label>Categoria</label>
@@ -61,7 +84,7 @@ export const DashboardPage = () => {
                     onChange={event => setDate(event.target.value)}
                 />
 
-                <button>Enviar</button>
+                <button type="submit">Enviar</button>
 
                 <Link to="/historial">Historial</Link>
                 <Link to="/user">Pagina principal</Link>
