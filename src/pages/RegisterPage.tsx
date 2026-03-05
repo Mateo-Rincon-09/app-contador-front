@@ -37,7 +37,7 @@ export const RegisterPage = () => {
                 <input
                     type="name"
                     value={name}
-                    onChange={name => setName(name.target.value)}
+                    onChange={event => setName(event.target.value)}
                     required
                 />
 
@@ -45,14 +45,14 @@ export const RegisterPage = () => {
                 <input
                     type="lastName"
                     value={lastName}
-                    onChange={lastName => setLastname(lastName.target.value)}
+                    onChange={event => setLastname(event.target.value)}
                 />
 
                 <label>Email</label>
                 <input
                     type="email"
                     value={email}
-                    onChange={email => setEmail(email.target.value)}
+                    onChange={event => setEmail(event.target.value)}
                     required
                 />
 
@@ -60,7 +60,7 @@ export const RegisterPage = () => {
                 <input
                     type="password"
                     value={password}
-                    onChange={password => setPassword(password.target.value)}
+                    onChange={event => setPassword(event.target.value)}
                     required
                 />
 
@@ -68,7 +68,7 @@ export const RegisterPage = () => {
                 <input
                     type="password"
                     value={confirm}
-                    onChange={confirm => setConfirm(confirm.target.value)}
+                    onChange={event => setConfirm(event.target.value)}
                     required
                 />
 
@@ -76,7 +76,7 @@ export const RegisterPage = () => {
                 <input
                     type="checkbox"
                     checked={accept}
-                    onChange={accept => setAccept(accept.target.checked)}
+                    onChange={event => setAccept(event.target.checked)}
                     required
                 />
                 Acepto los <Link to="#">teminos y condiciones</Link>

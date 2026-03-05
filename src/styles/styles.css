@@ -1,7 +1,7 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Home Page */
@@ -14,12 +14,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 40px;
-  box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .nav-home {
   display: flex;
-  gap: 30px;  
+  gap: 30px;
 }
 
 .nav-home a {
@@ -33,7 +33,7 @@
   color: #38bdf8;
 }
 
-.body-container-home{
+.body-container-home {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -80,7 +80,7 @@
   border-radius: 10px;
   padding: 20px;
   background-color: white;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .plan-title-home {
@@ -100,12 +100,12 @@
   line-height: 1.6;
 }
 
-.plan-card-home:first-child{
+.plan-card-home:first-child {
   border: 2px solid #4d6379;
   transform: scale(1.0);
 }
 
-.button-home{
+.button-home {
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #4d6379;
@@ -118,7 +118,7 @@
 }
 
 
-/*Login page && Register page*/ 
+/*Login page && Register page*/
 
 
 form {
@@ -127,7 +127,7 @@ form {
   padding: 35px;
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0px 6px 20px rgba(0,0,0,0.1);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -157,7 +157,7 @@ form input {
 form input:focus {
   outline: none;
   border: 1px solid #1e293b;
-  box-shadow: 0px 0px 3px rgba(30,41,59,0.3);
+  box-shadow: 0px 0px 3px rgba(30, 41, 59, 0.3);
 }
 
 form p {
@@ -196,5 +196,160 @@ form button:active {
 }
 
 
+/* Dashboard Page */
 
-/*Dashboard Page*/
+
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4d6379, #1e293b);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.dashboard-form {
+  width: 500px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dashboard-form h2 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #1e293b;
+}
+
+.dashboard-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4d6379;
+  margin-top: 5px;
+}
+
+.dashboard-form input,
+.dashboard-form select {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background-color: #f8fafc;
+  transition: 0.3s;
+}
+
+.dashboard-form input:focus,
+.dashboard-form select:focus {
+  outline: none;
+  border: 1px solid #4d6379;
+  box-shadow: 0px 0px 6px rgba(77, 99, 121, 0.3);
+  background-color: white;
+}
+
+.dashboard-form button {
+  margin-top: 15px;
+  padding: 14px;
+  background: linear-gradient(135deg, #4d6379, #1e293b);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dashboard-form button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.dashboard-form a {
+  color: #4d6379;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  font-size: 17px;
+}
+
+.dashboard-form a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+/* USER PAGE */
+
+.user-dashboard{
+  display: flex;
+  height: 100vh;
+}
+
+.user-sidebar{
+  width: 250px;
+  background-color: #1e293b;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 20px;
+}
+
+.user-logo{
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.user-nav{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user-nav-item{
+  text-decoration: none;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  transition: 0.25s;
+}
+
+.user-nav-item:hover{
+  background-color: #334155;
+}
+
+.user-logout{
+  text-decoration: none;
+  color: #f87171;
+  font-weight: 500;
+}
+
+.user-logout:hover{
+  text-decoration: underline;
+}
+
+.user-content{
+  flex: 1;
+  padding: 60px;
+  background-color: #f8fafc;
+}
+
+.user-title{
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+.user-description{
+  font-size: 16px;
+  color: #475569;
+  max-width: 500px;
+  line-height: 1.6;
+}

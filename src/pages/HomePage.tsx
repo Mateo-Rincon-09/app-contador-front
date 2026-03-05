@@ -1,19 +1,13 @@
 import { Link } from "react-router-dom"
 import "../styles/styles.css"
 
-// react-query example
-import { useGet } from '../api/hooks';
+
 
 export const HomePage = () => {
-    // ejemplo de petición con react-query al backend
-    const { data, isLoading, error } = useGet<{message: string}>(['ping'], '/ping');
-
+ 
     return (
         <div>
             <header className="header-home">
-                {isLoading && <div>cargando servidor...</div>}
-                {error && <div className="error">no se pudo conectar</div>}
-                {data && <div className="server-message">{data.message}</div>}
                 <div className="nav-home">
                     <Link to="/login">Iniciar sesion</Link>
                     <Link to="/register">Registrarse</Link>

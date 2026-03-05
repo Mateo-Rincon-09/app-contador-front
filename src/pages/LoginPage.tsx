@@ -10,7 +10,7 @@ export const LoginPage = () => {
     const navigate = useNavigate();
 
     const user = () => {
-        if( name ){
+        if( name && email && password ){
             navigate("/user");
         }
     }
@@ -24,14 +24,14 @@ export const LoginPage = () => {
                 <input
                     type="text"
                     value={name}
-                    onChange={name => setName(name.target.value)}
+                    onChange={event => setName(event.target.value)}
                     required
                 />
                 <label>Email</label>
                 <input
                     type="email"
                     value={email}
-                    onChange={email => setEmail(email.target.value)}
+                    onChange={event => setEmail(event.target.value)}
                     placeholder="tucorreo@gmail.com"
                     required
                 />
@@ -39,7 +39,7 @@ export const LoginPage = () => {
                 <input
                     type="password"
                     value={password}
-                    onChange={password => setPassword(password.target.value)}
+                    onChange={event => setPassword(event.target.value)}
                     required
                 />
                 <button onClick={user}>Iniciar sesion</button>
