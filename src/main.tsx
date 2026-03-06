@@ -4,11 +4,12 @@ import { App } from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { MovimientosProvider } from "./context/MovimientosContext";
 
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <MovimientosProvider>
-        <App />
+          <App />
       </MovimientosProvider>
     </BrowserRouter>
   </StrictMode>,

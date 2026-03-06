@@ -10,3 +10,8 @@ export interface MovimientosContextInterface {
   movimientos: Movimiento[];
   agregarMovimiento: (movimiento: Movimiento) => void;
 }
+
+export interface metaAhorro {
+  meta: number;
+  progreso: number;
+}
