@@ -82,7 +82,7 @@ export const RegisterPage = () => {
                 Acepto los <Link to="#">teminos y condiciones</Link>
                 </label>
 
-                <button>Registrarme</button>
+                <button type="submit">Registrarme</button>
 
                 <p>
                     ¿Ya tienes cuenta? <Link to="/login">Login</Link>
