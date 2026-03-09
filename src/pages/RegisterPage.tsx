@@ -1,23 +1,38 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AuthRegisterRequest, registerAuth } from "../api/auth/authApi"
 import { useMutation } from "@tanstack/react-query"
 import { getServiceMessageError } from "../services/errorHandler.service"
+import { useUserContext } from "../context/UserContext"
 
+interface RegisterFormFields {
+    name: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirm: string;
+    accept: boolean;
+}
 
 export const RegisterPage = () => {
 
-    const [name, setName] = useState("")
-    const [lastName, setLastname] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [confirm, setConfirm] = useState("")
-    const [accept, setAccept] = useState(false)
+    const [userFields, setUserFields] = useState<RegisterFormFields>({
+        name: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirm: "",
+        accept: false
+    });
+
+    const { userActions } = useUserContext()
+    const navigate = useNavigate()
 
     const registerMutation = useMutation({
         mutationFn: (value: AuthRegisterRequest) => registerAuth(value), 
         onSuccess: (data) => {
-            console.log("Usuario registrado:", data);
+            userActions.loginUser(data.user, data.token)
+            navigate("/dashboard")
         },
         onError: (error) => {
             console.log("Error al registrar usuario:", getServiceMessageError(error.message));
@@ -28,16 +43,11 @@ export const RegisterPage = () => {
         event.preventDefault();
 
         registerMutation.mutate({
-            name,
-            email,
-            password
+            name: userFields.name,
+            email: userFields.email,
+            password: userFields.password
         })
-
-
     }
-
-
-
 
     return (
         <div>
@@ -47,50 +57,50 @@ export const RegisterPage = () => {
                 <label>Name</label>
                 <input
                     type="name"
-                    value={name}
-                    onChange={event => setName(event.target.value)}
+                    value={userFields.name}
+                    onChange={event => setUserFields({ ...userFields, name: event.target.value })}
                     required
                 />
 
                 <label>Last Name</label>
                 <input
                     type="lastName"
-                    value={lastName}
-                    onChange={event => setLastname(event.target.value)}
+                    value={userFields.lastName}
+                    onChange={event => setUserFields({ ...userFields, lastName: event.target.value })}
                 />
 
                 <label>Email</label>
                 <input
                     type="email"
-                    value={email}
-                    onChange={event => setEmail(event.target.value)}
+                    value={userFields.email}
+                    onChange={event => setUserFields({ ...userFields, email: event.target.value })}
                     required
                 />
 
                 <label>Password</label>
                 <input
                     type="password"
-                    value={password}
-                    onChange={event => setPassword(event.target.value)}
+                    value={userFields.password}
+                    onChange={event => setUserFields({ ...userFields, password: event.target.value })}
                     required
                 />
 
                 <label>Confirm Password</label>
                 <input
                     type="password"
-                    value={confirm}
-                    onChange={event => setConfirm(event.target.value)}
+                    value={userFields.confirm}
+                    onChange={event => setUserFields({ ...userFields, confirm: event.target.value })}
                     required
                 />
 
                 <label>
                     <input
                         type="checkbox"
-                        checked={accept}
-                        onChange={event => setAccept(event.target.checked)}
+                        checked={userFields.accept}
+                        onChange={event => setUserFields({ ...userFields, accept: event.target.checked })}
                         required
                     />
-                    Acepto los <Link to="#">teminos y condiciones</Link>
+                    Acepto los <Link to="#">Términos y condiciones</Link>
                 </label>
 
                 <button type="submit">Registrarme</button>
