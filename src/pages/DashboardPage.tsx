@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMovimientos } from "../context/MovimientosContext";
 import { useState } from "react";
 import { formatNum } from "../services/formatNum";
@@ -99,8 +99,6 @@ export const DashboardPage = () => {
 
         <button type="submit">Enviar</button>
 
-        <Link to="/historial">Historial</Link>
-        <Link to="/user">Pagina principal</Link>
       </form>
     </div>
   );

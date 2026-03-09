@@ -2,15 +2,15 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { MovimientosProvider } from "./context/MovimientosContext";
+import { ContextProviders } from "./context/ContextProviders";
 
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <MovimientosProvider>
-          <App />
-      </MovimientosProvider>
+      <ContextProviders>
+        <App />
+      </ContextProviders>
     </BrowserRouter>
   </StrictMode>,
 );
