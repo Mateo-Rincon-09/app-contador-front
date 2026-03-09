@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { loginAuth } from "../api/auth/authApi";
 
 export const LoginPage = () => {
   const [name, setName] = useState("");
@@ -7,15 +8,15 @@ export const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const user = () => {
-    if (name && email && password) {
-      navigate("/user");
-    }
-  };
+  const handleSubmit = async () => {
+     await loginAuth(email)
+
+     navigate("/user");
+  }
 
   return (
     <div>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <h2>Iniciar sesión</h2>
 
         <label>Name</label>
@@ -40,7 +41,7 @@ export const LoginPage = () => {
           onChange={(event) => setPassword(event.target.value)}
           required
         />
-        <button onClick={user}>Iniciar sesion</button>
+        <button type="submit">Iniciar sesion</button>
         <p>
           ¿No tienes cuenta? <Link to="/register">Registrarme</Link>
         </p>

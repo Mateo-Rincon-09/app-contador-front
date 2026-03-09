@@ -7,6 +7,12 @@ export const loginAuth = (id: string): Promise<User> => {
     return fetchApi.post(authEndpoint.login, { id }).then((res) => res.data);
 };
 
-export const registerAuth = (nombre: string, email: string, password: string): Promise<User> => {
-    return fetchApi.post(authEndpoint.register, { nombre, email, password }).then((res) => res.data);
+export const registerAuth = (request: AuthRegisterRequest): Promise<User> => {
+    return fetchApi.post(authEndpoint.register, { request }).then((res) => res.data);
 };
+
+export interface AuthRegisterRequest {
+    name: string;
+    email: string;
+    password: string;
+}

@@ -1,5 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { AuthRegisterRequest, registerAuth } from "../api/auth/authApi"
+import { useMutation } from "@tanstack/react-query"
+import { getServiceMessageError } from "../services/errorHandler.service"
 
 
 export const RegisterPage = () => {
@@ -9,23 +12,31 @@ export const RegisterPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirm, setConfirm] = useState("")
-    const [, setError] = useState("")
     const [accept, setAccept] = useState(false)
 
-    const handleSubmit = async ( event: React.SyntheticEvent ) => {
-        event.preventDefault();
-        
-        if( password !== confirm ) {
-            setError('Las contraseñas no coinciden');
-            return;
-        }
+    const registerMutation = useMutation({
+        mutationFn: (value: AuthRegisterRequest) => registerAuth(value), 
+        onSuccess: (data) => {
+            console.log("Usuario registrado:", data);
+        },
+        onError: (error) => {
+            console.log("Error al registrar usuario:", getServiceMessageError(error.message));
+        },
+    })
 
-        if( !accept ){
-            setError('Debes aceptar los terminos y condiciones');
-            return
-        }
+    const handleSubmit =  (event: React.SyntheticEvent) => {
+        event.preventDefault();
+
+        registerMutation.mutate({
+            name,
+            email,
+            password
+        })
+
 
     }
+
+
 
 
     return (
@@ -73,13 +84,13 @@ export const RegisterPage = () => {
                 />
 
                 <label>
-                <input
-                    type="checkbox"
-                    checked={accept}
-                    onChange={event => setAccept(event.target.checked)}
-                    required
-                />
-                Acepto los <Link to="#">teminos y condiciones</Link>
+                    <input
+                        type="checkbox"
+                        checked={accept}
+                        onChange={event => setAccept(event.target.checked)}
+                        required
+                    />
+                    Acepto los <Link to="#">teminos y condiciones</Link>
                 </label>
 
                 <button type="submit">Registrarme</button>
