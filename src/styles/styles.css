@@ -201,7 +201,7 @@ form button:active {
 
 .dashboard-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #4d6379, #1e293b);
+  background: #4d6379;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -352,4 +352,92 @@ form button:active {
   color: #475569;
   max-width: 500px;
   line-height: 1.6;
+}
+
+
+/*Historial Page*/
+
+
+
+/* CONTENEDOR */
+.historial-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
+  font-family: "Inter", sans-serif;
+}
+
+/* TITULO */
+.historial-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* MENSAJE VACIO */
+.historial-empty {
+  text-align: center;
+  padding: 30px;
+  color: #777;
+}
+
+/* TABLA */
+.historial-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+.historial-table thead {
+  background: #f4f6f8;
+}
+
+.historial-table th {
+  padding: 14px;
+  font-size: 14px;
+  text-align: left;
+  color: #555;
+}
+
+/* FILAS */
+.historial-table td {
+  padding: 14px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* HOVER FILAS */
+.historial-table tbody tr:hover {
+  background: #f9fafc;
+}
+
+/* INGRESO */
+.ingreso {
+  color: #1aa053;
+  font-weight: 600;
+}
+
+/* GASTO */
+.gasto {
+  color: #d64545;
+  font-weight: 600;
+}
+
+/* BOTON ELIMINAR */
+.delete-btn {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  background: #e03636;
 }

@@ -8,13 +8,13 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-    { label: "Dashboard", path: "/dashboard", icon: "📊" },
+    { label: "Agregar", path: "/dashboard", icon: "📊" },
     { label: "Ahorro",    path: "/ahorro",    icon: "💰" },
     { label: "Historial", path: "/historial", icon: "📋" },
     { label: "Perfil",    path: "/user",      icon: "👤" },
 ];
 
-const VerticalMenu = () => {
+export const VerticalMenu = () => {
     return (
         <aside className="vertical-menu">
             <div className="vertical-menu__brand">
@@ -39,5 +39,3 @@ const VerticalMenu = () => {
         </aside>
     );
 };
-
-export default VerticalMenu;

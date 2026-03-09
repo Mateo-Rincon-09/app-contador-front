@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import VerticalMenu from "../VerticalMenu/VerticalMenu";
+import { VerticalMenu } from "../VerticalMenu/VerticalMenu";
 import "./AppContainer.css";
 
-const AppContainer = () => {
+export const AppContainer = () => {
     return (
         <div className="app-container">
             <VerticalMenu />
@@ -12,5 +12,3 @@ const AppContainer = () => {
         </div>
     );
 };
-
-export default AppContainer;

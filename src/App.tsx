@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import {
   AhorroPage, DashboardPage, HistorialPage, HomePage, LoginPage, RegisterPage, UserPage
 } from "./pages"
-import AppContainer from "./components/AppContainer/AppContainer"
+import { AppContainer } from "./components/AppContainer/AppContainer"
 
 export const App = () => {
   return (

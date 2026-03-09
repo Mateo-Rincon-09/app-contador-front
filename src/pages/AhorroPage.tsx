@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import { formatNum } from '../services/formatNum';
 
 export const AhorroPage = () => {
@@ -29,10 +28,6 @@ export const AhorroPage = () => {
                 />
 
                 <button type="submit">Agregar</button>
-
-
-                <Link to="/user">Pagina Principal</Link>
-
 
                 
             </form>
