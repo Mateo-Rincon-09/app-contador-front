@@ -32,10 +32,10 @@ export const RegisterPage = () => {
         mutationFn: (value: AuthRegisterRequest) => registerAuth(value), 
         onSuccess: (data) => {
             userActions.loginUser(data.user, data.token)
-            navigate("/dashboard")
+            navigate("/user")
         },
         onError: (error) => {
-            console.log("Error al registrar usuario:", getServiceMessageError(error.message));
+            console.log("Error al registrar usuario:", getServiceMessageError(error));
         },
     })
 
@@ -61,7 +61,8 @@ export const RegisterPage = () => {
                     onChange={event => setUserFields({ ...userFields, name: event.target.value })}
                     required
                 />
-
+                
+                
                 <label>Last Name</label>
                 <input
                     type="lastName"

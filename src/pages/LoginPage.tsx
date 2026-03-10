@@ -1,17 +1,38 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginAuth } from "../api/auth/authApi";
+import { useUserContext } from "../context/UserContext";
+import { useMutation } from "@tanstack/react-query";
+import { AuthLoginRequest, loginAuth } from "../api/auth/authApi";
+
+
 
 export const LoginPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
   const navigate = useNavigate();
+  const { userActions } = useUserContext();
 
-  const handleSubmit = async () => {
-     await loginAuth(email)
+  const loginMutation = useMutation({
+    mutationFn: (value: AuthLoginRequest) => loginAuth(value),
+    onSuccess: (data) => {
+      userActions.loginUser(data.user, data.token)
+      navigate("/user");
+    },
+    onError: (error) => {
+      console.log(error);
+    }
+  })
 
-     navigate("/user");
+  const handleSubmit = (event: React.SyntheticEvent) => {
+
+    event.preventDefault();
+
+    loginMutation.mutate({
+      email: email,
+      password: password
+    })
+
   }
 
   return (
@@ -19,13 +40,6 @@ export const LoginPage = () => {
       <form className="form" onSubmit={handleSubmit}>
         <h2>Iniciar sesión</h2>
 
-        <label>Name</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          required
-        />
         <label>Email</label>
         <input
           type="email"

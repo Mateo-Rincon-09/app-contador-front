@@ -87,9 +87,19 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
     const loginUser = (user: User, token: string) => {
         setDefaultToken(token);
         setStoredData(LocalStoreKeys.token, token);
-        const newState: IUserState = { ...userState, user, authorized: true, isFetchDone: true };
-        setUserState(newState);
-        setStoredData(LocalStoreKeys.user, newState);
+        setUserState((prev) => {
+            const newState: IUserState = {
+                ...prev,
+                user,
+                authorized: true,
+                isFetchDone: true
+            };
+
+            setStoredData(LocalStoreKeys.user, newState);
+
+            return newState;
+        })
+
     };
 
     useEffect(() => {
@@ -100,6 +110,7 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
 
     return (
         <UserContext.Provider

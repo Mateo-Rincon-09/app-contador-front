@@ -6,6 +6,10 @@ import "./AppContainer.css";
 export const AppContainer = () => {
     const { userState } = useUserContext();
 
+    if (!userState.isFetchDone){
+        return <div>Loading...</div>
+    }
+
     if (!userState.authorized) {
         return <Navigate to="/login" replace />;
     }

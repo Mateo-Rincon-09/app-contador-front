@@ -7,8 +7,8 @@ export interface AuthResponse {
     token: string;
 }
 
-export const loginAuth = (id: string): Promise<User> => {
-    return fetchApi.post(authEndpoint.login, id ).then((res) => res.data);
+export const loginAuth = (request: AuthLoginRequest): Promise<AuthResponse> => {
+    return fetchApi.post(authEndpoint.login, request ).then((res) => res.data);
 };
 
 export const registerAuth = (request: AuthRegisterRequest): Promise<AuthResponse> => {
@@ -17,6 +17,11 @@ export const registerAuth = (request: AuthRegisterRequest): Promise<AuthResponse
 
 export interface AuthRegisterRequest {
     name: string;
+    email: string;
+    password: string;
+}
+
+export interface AuthLoginRequest {
     email: string;
     password: string;
 }
