@@ -1,30 +1,45 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUserContext } from "../context/UserContext";
+import { useMutation } from "@tanstack/react-query";
+import { AuthLoginRequest, loginAuth } from "../api/auth/authApi";
+
+
 
 export const LoginPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
-  const user = () => {
-    if (name && email && password) {
+  const navigate = useNavigate();
+  const { userActions } = useUserContext();
+
+  const loginMutation = useMutation({
+    mutationFn: (value: AuthLoginRequest) => loginAuth(value),
+    onSuccess: (data) => {
+      userActions.loginUser(data.user, data.token)
       navigate("/user");
+    },
+    onError: (error) => {
+      console.log(error);
     }
-  };
+  })
+
+  const handleSubmit = (event: React.SyntheticEvent) => {
+
+    event.preventDefault();
+
+    loginMutation.mutate({
+      email: email,
+      password: password
+    })
+
+  }
 
   return (
     <div>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <h2>Iniciar sesión</h2>
 
-        <label>Name</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          required
-        />
         <label>Email</label>
         <input
           type="email"
@@ -40,7 +55,7 @@ export const LoginPage = () => {
           onChange={(event) => setPassword(event.target.value)}
           required
         />
-        <button onClick={user}>Iniciar sesion</button>
+        <button type="submit">Iniciar sesion</button>
         <p>
           ¿No tienes cuenta? <Link to="/register">Registrarme</Link>
         </p>
