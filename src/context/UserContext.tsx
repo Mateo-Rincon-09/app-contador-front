@@ -6,7 +6,6 @@ import { LocalStoreKeys } from "../enums/localStoreKeys.enum";
 import { UserType } from "../enums/userType.enum";
 import { getStoredData, setStoredData } from "../services/localStorage.service";
 import { getServiceMessageError } from "../services/errorHandler.service";
-import { setDefaultToken } from "../api/fetchApi";
 
 export interface IUserState {
     isFetchDone?: boolean;
@@ -85,7 +84,8 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const loginUser = (user: User, token: string) => {
-        setDefaultToken(token);
+       
+        localStorage.setItem("token", token.replace(/"/g, ""))
         setStoredData(LocalStoreKeys.token, token);
         setUserState((prev) => {
             const newState: IUserState = {
@@ -104,8 +104,7 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         const token = getStoredData<string | null>(null, LocalStoreKeys.token);
-        if (token && initState.authorized && initState.user?.id) {
-            setDefaultToken(token);
+        if (token && initState.user?.id) {
             userMutation.mutate(initState.user.id);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

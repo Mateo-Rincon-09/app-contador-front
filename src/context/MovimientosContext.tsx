@@ -1,34 +1,92 @@
-import { createContext, ReactNode, useContext, useEffect, useState, } from "react";
-import { Movimiento, MovimientosContextInterface, } from "../interface/interface";
+import React, { createContext, useContext, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { MovimientoInterface } from "../interface/movimiento-interface";
+import { getMovements } from "../api/movements/movementsApi"; // Asumiendo que existe esta función
+import { LocalStoreKeys } from "../enums/localStoreKeys.enum";
+import { getStoredData, setStoredData } from "../services/localStorage.service";
+import { getServiceMessageError } from "../services/errorHandler.service";
 
-const MovimientosContext = createContext<MovimientosContextInterface | null>(null);
+export interface IMovimientoState {
+    isFetchDone?: boolean;
+    movimientos?: MovimientoInterface[];
+};
 
-export const MovimientosProvider = ({ children }: { children: ReactNode }) => {
-  const [movimientos, setMovimientos] = useState<Movimiento[]>(() => {
-    const data = localStorage.getItem("movimientos");
-    return data ? JSON.parse(data) : [];
-  });
+const initStateBase: IMovimientoState = {
+    movimientos: [],
+};
 
-  useEffect(() => {
-    localStorage.setItem("movimientos", JSON.stringify(movimientos));
-  }, [movimientos]);
+interface IContextProps {
+    movimientoState: IMovimientoState;
+    setMovimientoState: (value: IMovimientoState) => void;
+    movimientoActions: IMovimientoActions;
+    movimientoRequestSuccess: boolean;
+    movimientoRequestIsLoading: boolean;
+};
 
-  const agregarMovimiento = (movimiento: Movimiento) => {
-    setMovimientos((prev) => [...prev, movimiento]);
-  };
+export interface IMovimientoActions {
+    requestMovimientos: () => void;
+    setMovimientos: (value: MovimientoInterface[]) => void;
+    addMovimiento: (movimiento: MovimientoInterface) => void;
+};
 
-  return (
-    <MovimientosContext.Provider value={{ movimientos, agregarMovimiento }}>
-      {children}
-    </MovimientosContext.Provider>
-  );
+const initState = getStoredData<IMovimientoState>(initStateBase, LocalStoreKeys.movimientos);
+
+const MovimientosContext = createContext({} as IContextProps);
+
+const MovimientosContextProvider = ({ children }: { children: React.ReactNode }) => {
+    const [movimientoState, setMovimientoState] = useState<IMovimientoState>(initState);
+
+    const movimientoMutation = useMutation({
+        mutationFn: () => getMovements(),
+        onSuccess: (data) => {
+            setMovimientoState({ ...movimientoState, movimientos: data, isFetchDone: true });
+        },
+        onError: (error: unknown) => {
+            console.log(getServiceMessageError(error));
+            setMovimientoState({ ...movimientoState, movimientos: [], isFetchDone: true });
+        },
+    });
+
+    const requestMovimientos = () => {
+        setMovimientoState({ ...movimientoState });
+        movimientoMutation.mutate();
+    };
+
+    const addMovimiento = (movimiento: MovimientoInterface) => {
+        setMovimientoState((prev) => {
+            const newMovimientos = prev.movimientos ? [...prev.movimientos, movimiento] : [movimiento];
+            const newState: IMovimientoState = {
+                ...prev,
+                movimientos: newMovimientos
+            };
+            setStoredData(LocalStoreKeys.movimientos, newState);
+            return newState;
+        });
+    };
+
+   
+    return (
+        <MovimientosContext.Provider
+            value={{
+                movimientoState,
+                setMovimientoState,
+                movimientoActions: {
+                    requestMovimientos,
+                    setMovimientos: (value) => setMovimientoState({ ...movimientoState, movimientos: value }),
+                    addMovimiento,
+                },
+                movimientoRequestIsLoading: movimientoMutation.isPending,
+                movimientoRequestSuccess: movimientoMutation.isSuccess,
+            }}
+        >
+            {children}
+        </MovimientosContext.Provider>
+    );
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useMovimientos = () => {
-  const context = useContext(MovimientosContext);
-  if (!context)
-    throw new Error("useMovimientos debe usarse dentro del provider");
-
-  return context;
+export const useMovimientosContext = () => {
+    return useContext(MovimientosContext);
 };
+
+export default MovimientosContextProvider;

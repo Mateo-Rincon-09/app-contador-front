@@ -20,17 +20,19 @@ export const userEndpoint = {
     },
 };
 
+
 export const movimientoEndpoint = {
-    getAll: "movimientos",
-    getById: (id: string) => `movimientos/${id}`,
+    getById: (id: string) => `movements/${id}`,
+    getAll: "movements",
 
     post: {
-        create: "movimientos",
+        create: "movements/create",
     },
     put: {
-        update: (id: string) => `movimientos/${id}`,
+        update: (id: string) => `movements/${id}`,
     },
     delete: {
-        remove: (id: string) => `movimientos/${id}`,
+        remove: (id: string) => `movements/${id}`,
     },
 };
+
