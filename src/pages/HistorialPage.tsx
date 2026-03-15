@@ -1,21 +1,21 @@
-import { useMovimientos } from "../context/MovimientosContext"
-import { formatNum } from "../services/formatNum"
+// import { useMovimientos } from "../context/MovimientosContext"
+// import { formatNum } from "../services/formatNum"
 
 export const HistorialPage = () => {
-    const { movimientos } = useMovimientos()
+    // const { movimientos } = useMovimientos()
 
-    const removeMov = (event: React.SyntheticEvent) => {
-        event.preventDefault();
-        localStorage.removeItem("movimientos");
-    }
+    // const removeMov = (event: React.SyntheticEvent) => {
+    //     event.preventDefault();
+    //     localStorage.removeItem("movimientos");
+    // }
 
     return (
         <div className="historial-container">
 
-            <h1 className="historial-title">Historial de movientos</h1>
+            {/* <h1 className="historial-title">Historial de movientos</h1>
             {movimientos.length === 0 ?
                 <p className="historial-empty">No tienes movimientos</p>
-                :
+                : */}
 
                 <table className="historial-table"> 
                     <thead>
@@ -29,7 +29,7 @@ export const HistorialPage = () => {
                             <th>Eliminar</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {/* <tbody>
                         {movimientos.map((movimiento, index) => (
                             <tr key={index}>
                                 <td>{movimiento.fecha}</td>
@@ -41,9 +41,9 @@ export const HistorialPage = () => {
                             </tr>
 
                         ))}
-                    </tbody>
+                    </tbody> */}
                 </table>
-            }
+            {/* }*/}
         </div>
     )
 }
