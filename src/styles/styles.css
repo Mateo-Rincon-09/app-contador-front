@@ -201,7 +201,6 @@ form button:active {
 
 .dashboard-container {
   min-height: 100vh;
-  background: #4d6379;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -211,7 +210,7 @@ form button:active {
 
 .dashboard-form {
   width: 500px;
-  background: #ffffff;
+  background: #4d6379;
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2);
@@ -224,13 +223,13 @@ form button:active {
   text-align: center;
   font-size: 26px;
   margin-bottom: 15px;
-  color: #1e293b;
+  color: white;
 }
 
 .dashboard-form label {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
-  color: #4d6379;
+  color: white;
   margin-top: 5px;
 }
 
@@ -254,8 +253,10 @@ form button:active {
 
 .dashboard-form button {
   margin-top: 15px;
+  margin-left: 25%;
+  width: 50%;
   padding: 14px;
-  background: linear-gradient(135deg, #4d6379, #1e293b);
+  background: rgba(9, 1, 30, 0.308);
   color: white;
   border: none;
   border-radius: 12px;
@@ -267,6 +268,7 @@ form button:active {
 .dashboard-form button:hover {
   opacity: 0.9;
   transform: translateY(-2px);
+    background: rgba(9, 1, 30, 0.308);
 }
 
 .dashboard-form a {
@@ -437,7 +439,6 @@ form button:active {
 
 
 
-/* CONTENEDOR */
 .historial-container {
   max-width: 900px;
   margin: auto;
@@ -445,21 +446,21 @@ form button:active {
   font-family: "Inter", sans-serif;
 }
 
-/* TITULO */
+
 .historial-title {
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 20px;
 }
 
-/* MENSAJE VACIO */
+
 .historial-empty {
   text-align: center;
   padding: 30px;
   color: #777;
 }
 
-/* TABLA */
+
 .historial-table {
   width: 100%;
   border-collapse: collapse;
@@ -469,7 +470,7 @@ form button:active {
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-/* HEADER */
+
 .historial-table thead {
   background: #f4f6f8;
 }
@@ -481,31 +482,31 @@ form button:active {
   color: #555;
 }
 
-/* FILAS */
+
 .historial-table td {
   padding: 14px;
   border-top: 1px solid #eee;
   font-size: 14px;
 }
 
-/* HOVER FILAS */
+
 .historial-table tbody tr:hover {
   background: #f9fafc;
 }
 
-/* INGRESO */
+
 .ingreso {
   color: #1aa053;
   font-weight: 600;
 }
 
-/* GASTO */
+
 .gasto {
   color: #d64545;
   font-weight: 600;
 }
 
-/* BOTON ELIMINAR */
+
 .delete-btn {
   background: #ff4d4d;
   color: white;

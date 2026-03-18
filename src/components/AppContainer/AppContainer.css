@@ -9,3 +9,36 @@
     padding: 32px;
     overflow-y: auto;
 }
+
+.app-loading {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: #f8f9fb;
+}
+
+.app-loading__spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #e5e7eb;
+  border-top: 5px solid #4f46e5;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.app-loading__text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  letter-spacing: 0.5px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

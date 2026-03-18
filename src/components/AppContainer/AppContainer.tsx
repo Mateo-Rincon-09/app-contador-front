@@ -6,8 +6,13 @@ import "./AppContainer.css";
 export const AppContainer = () => {
     const { userState } = useUserContext();
 
-    if (!userState.isFetchDone){
-        return <div>Loading...</div>
+    if (!userState.isFetchDone) {
+        return (
+            <div className="app-loading">
+                <div className="app-loading__spinner"></div>
+                <p className="app-loading__text">Cargando...</p>
+            </div>
+        );
     }
 
     if (!userState.authorized) {

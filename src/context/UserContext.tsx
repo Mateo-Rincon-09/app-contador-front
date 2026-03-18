@@ -38,6 +38,7 @@ export interface IUserActions {
     requestUser: (userId: string) => void;
     setUser: (value: User) => void;
     loginUser: (user: User, token: string) => void;
+    logOut: () => void;
 };
 
 
@@ -84,9 +85,9 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const loginUser = (user: User, token: string) => {
-       
+
         localStorage.setItem("token", token.replace(/"/g, ""))
-        setStoredData(LocalStoreKeys.token, token);
+       
         setUserState((prev) => {
             const newState: IUserState = {
                 ...prev,
@@ -110,6 +111,17 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const logOut = () => {
+        localStorage.removeItem("token")
+        localStorage.removeItem(LocalStoreKeys.user)
+
+        setUserState({
+            user: undefined,
+            authorized: false,
+            isFetchDone: true,
+        })
+    }
+
 
     return (
         <UserContext.Provider
@@ -122,6 +134,7 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
                     requestUser,
                     setUser: (value) => setUserState({ ...userState, user: value }),
                     loginUser,
+                    logOut,
                 },
                 userRequestIsLoading: userMutation.isPending,
                 userRequestSuccess: userMutation.isSuccess,

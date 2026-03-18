@@ -1,49 +1,52 @@
-// import { useMovimientos } from "../context/MovimientosContext"
-// import { formatNum } from "../services/formatNum"
+import { useEffect } from "react";
+import { useMovimientosContext } from "../context/MovimientosContext";
+import { formatNum } from "../services/formatNum";
 
 export const HistorialPage = () => {
-    // const { movimientos } = useMovimientos()
+  const { movimientoState, movimientoActions, movimientoRequestIsLoading } = useMovimientosContext();
 
-    // const removeMov = (event: React.SyntheticEvent) => {
-    //     event.preventDefault();
-    //     localStorage.removeItem("movimientos");
-    // }
+  useEffect(() => {
+    movimientoActions.requestMovimientos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    return (
-        <div className="historial-container">
+  const movimientos = movimientoState.movimientos ?? [];
 
-            {/* <h1 className="historial-title">Historial de movientos</h1>
-            {movimientos.length === 0 ?
-                <p className="historial-empty">No tienes movimientos</p>
-                : */}
+  return (
+    <div className="historial-container">
+      <h1 className="historial-title">Historial de movimientos</h1>
 
-                <table className="historial-table"> 
-                    <thead>
-                        <tr>
-
-                            <th>Fecha</th>
-                            <th>Categoria</th>
-                            <th>Descripcion</th>
-                            <th>Ingreso</th>
-                            <th>Gasto</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                    {/* <tbody>
-                        {movimientos.map((movimiento, index) => (
-                            <tr key={index}>
-                                <td>{movimiento.fecha}</td>
-                                <td>{movimiento.categoria} </td>
-                                <td>{movimiento.descripcion}</td>
-                                <td className="ingreso">{movimiento.montoIngreso > 0 ? `+${formatNum(movimiento.montoIngreso)}` : 0}</td>
-                                <td className="gasto">{movimiento.montoGasto > 0 ? `-${formatNum(movimiento.montoGasto)}` : 0}</td>
-                                <td><button className="delete-btn" onClick={removeMov}>Eliminar</button></td>
-                            </tr>
-
-                        ))}
-                    </tbody> */}
-                </table>
-            {/* }*/}
+      {movimientoRequestIsLoading ? (
+        <p className="historial-empty">Cargando movimientos...</p>
+      ) : movimientos.length === 0 ? (
+        <div className="historial-empty">
+          <p>No hay movimientos para mostrar.</p>
+          <p>Agrega un movimiento para verlo aquí.</p>
         </div>
-    )
-}
+      ) : (
+        <table className="historial-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Categoría</th>
+              <th>Descripción</th>
+              <th>Ingreso</th>
+              <th>Gasto</th>
+            </tr>
+          </thead>
+          <tbody>
+            {movimientos.map((movimiento) => (
+              <tr key={movimiento.id}>
+                <td>{new Date(movimiento.fecha).toLocaleDateString("es-CO")}</td>
+                <td>{movimiento.categoria}</td>
+                <td>{movimiento.descripcion}</td>
+                <td className="ingreso">{formatNum(movimiento.montoIngreso)}</td>
+                <td className="gasto">{formatNum(movimiento.montoGasto)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+};
