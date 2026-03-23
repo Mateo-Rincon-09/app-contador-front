@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { MovimientoInterface } from "../interface/movimiento-interface";
+import { MovimientoInterface } from "../interface/movimiento.interface";
 import { getMovements } from "../api/movements/movementsApi"; // Asumiendo que existe esta función
 import { LocalStoreKeys } from "../enums/localStoreKeys.enum";
 import { getStoredData, setStoredData } from "../services/localStorage.service";

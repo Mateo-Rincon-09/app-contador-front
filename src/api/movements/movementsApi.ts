@@ -1,4 +1,4 @@
-import { MovimientoInterface } from "../../interface/movimiento-interface";
+import { MovimientoInterface } from "../../interface/movimiento.interface";
 import { movimientoEndpoint } from "../endpoints";
 import fetchApi from "../fetchApi";
 

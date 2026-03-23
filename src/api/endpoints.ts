@@ -4,6 +4,7 @@ export const authEndpoint = {
     refreshToken: "auth/refresh-token",
 };
 
+
 export const userEndpoint = {
     getById: (id: string) => `users/${id}`,
     getAll: "users",
@@ -36,3 +37,18 @@ export const movimientoEndpoint = {
     },
 };
 
+
+export const savingEndpoint = {
+    getById: (id: string) => `saving/${id}`,
+    getAll: "saving",
+
+    post: {
+        create: "saving/new"
+    },
+    put: {
+        update: (id: string) => `saving/${id}`
+    },
+    delete: {
+        remove: (id: string) => `saving/${id}`
+    },
+}
