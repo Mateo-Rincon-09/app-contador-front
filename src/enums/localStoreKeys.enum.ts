@@ -3,4 +3,5 @@ export enum LocalStoreKeys {
     token = "token",
     refreshToken = "refreshToken",
     movimientos = "movimientos",
+    savings = "savings"
 }

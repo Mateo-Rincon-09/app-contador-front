@@ -1,14 +1,36 @@
 import { useState } from "react"
 import { formatNum } from "../services/formatNum";
+import { useNavigate } from 'react-router-dom';
+import { useSavingsContext } from "../context/SavingContext";
+import { useMutation } from "@tanstack/react-query";
+import { SavingRequest, savings } from "../api/savings/savingsApi";
 
 export const AhorroPage = () => {
 
     const [meta, setMeta] = useState<number>(0)
- 
-    const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+    //const [progreso, setProgreso] = useState<number>(0)
+
+    const { savingActions } = useSavingsContext();
+    const navigate = useNavigate();
+
+    const savingMutation = useMutation({
+        mutationFn: (value: SavingRequest) => savings(value),
+        onSuccess: (data) => {
+            savingActions.addSaving(data.saving);
+            navigate("/ahorro");
+        },
+        onError: (error) => {
+            console.log(`Error al agregar movimiento ${error}`);
+        }
+    })
+
+    const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
 
-        setMeta(0);
+        savingMutation.mutate({
+            montoMeta: meta,
+           
+        })
     }
 
 
@@ -29,7 +51,7 @@ export const AhorroPage = () => {
 
                 <button type="submit">Agregar</button>
 
-                
+
             </form>
         </div>
     )

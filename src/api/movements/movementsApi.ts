@@ -15,10 +15,6 @@ export interface MovementResponse {
     movement: MovimientoInterface;
 }
 
-export interface MovementsListResponse {
-    movements: MovimientoInterface[];
-}
-
 export const movements = (request: MovementRequest ): Promise <MovementResponse> => {
     return fetchApi.post(movimientoEndpoint.post.create, request).then((res) => res.data)
 }
