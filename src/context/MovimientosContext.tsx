@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { MovimientoInterface } from "../interface/movimiento.interface";
-import { getMovements } from "../api/movements/movementsApi"; // Asumiendo que existe esta función
+import { MovimientoInterface } from '../interface/movimiento.interface';
+import { getMovementsPagination } from "../api/movements/movementsApi";
 import { LocalStoreKeys } from "../enums/localStoreKeys.enum";
 import { getStoredData, setStoredData } from "../services/localStorage.service";
 import { getServiceMessageError } from "../services/errorHandler.service";
@@ -37,9 +37,9 @@ const MovimientosContextProvider = ({ children }: { children: React.ReactNode })
     const [movimientoState, setMovimientoState] = useState<IMovimientoState>(initState);
 
     const movimientoMutation = useMutation({
-        mutationFn: () => getMovements(),
+        mutationFn: () => getMovementsPagination({ currentPage: 1, pageSize: 20 }),
         onSuccess: (data) => {
-            setMovimientoState({ ...movimientoState, movimientos: data, isFetchDone: true });
+            setMovimientoState({ ...movimientoState, movimientos: data.items, isFetchDone: true });
         },
         onError: (error: unknown) => {
             console.log(getServiceMessageError(error));

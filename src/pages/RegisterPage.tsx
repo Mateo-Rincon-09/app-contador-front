@@ -4,6 +4,7 @@ import { AuthRegisterRequest, registerAuth } from "../api/auth/authApi"
 import { useMutation } from "@tanstack/react-query"
 import { getServiceMessageError } from "../services/errorHandler.service"
 import { useUserContext } from "../context/UserContext"
+import "../styles/login-register.css";
 
 interface RegisterFormFields {
     name: string;

@@ -1,23 +1,20 @@
 import { useState } from "react"
 import { formatNum } from "../services/formatNum";
-import { useNavigate } from 'react-router-dom';
 import { useSavingsContext } from "../context/SavingContext";
 import { useMutation } from "@tanstack/react-query";
 import { SavingRequest, savings } from "../api/savings/savingsApi";
+import "../styles/dashboard-saving.css";
 
-export const AhorroPage = () => {
+export const SavingPage = () => {
 
     const [meta, setMeta] = useState<number>(0)
-    //const [progreso, setProgreso] = useState<number>(0)
 
     const { savingActions } = useSavingsContext();
-    const navigate = useNavigate();
 
     const savingMutation = useMutation({
         mutationFn: (value: SavingRequest) => savings(value),
         onSuccess: (data) => {
             savingActions.addSaving(data.saving);
-            navigate("/ahorro");
         },
         onError: (error) => {
             console.log(`Error al agregar movimiento ${error}`);
@@ -29,7 +26,6 @@ export const AhorroPage = () => {
 
         savingMutation.mutate({
             montoMeta: meta,
-           
         })
     }
 

@@ -28,6 +28,7 @@ export const movimientoEndpoint = {
 
     post: {
         create: "movements/create",
+        listMovements: "movements/list"
     },
     put: {
         update: (id: string) => `movements/${id}`,

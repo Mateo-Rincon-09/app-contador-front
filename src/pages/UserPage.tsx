@@ -1,3 +1,5 @@
+import "../styles/user.css";
+
 export const UserPage = () => {
 
     return (

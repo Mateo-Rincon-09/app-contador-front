@@ -4,6 +4,7 @@ import { formatNum } from "../services/formatNum";
 import { useMutation } from "@tanstack/react-query";
 import { MovementRequest, movements } from "../api/movements/movementsApi";
 import { useMovimientosContext } from "../context/MovimientosContext";
+import "../styles/dashboard-saving.css";
 
 interface MovimientoFormFields {
   montoIngreso: number;
@@ -46,7 +47,9 @@ export const DashboardPage = () => {
       montoGasto: movimientoFields.montoGasto,
       categoria: movimientoFields.categoria,    
       descripcion: movimientoFields.descripcion,
-      fecha: movimientoFields.fecha
+      fecha: movimientoFields.fecha,
+      currentPage: 1,
+      pageSize: 20
     })
 
 

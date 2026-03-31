@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import {
-  AhorroPage, DashboardPage, HistorialPage, HomePage, LoginPage, RegisterPage, UserPage
+  SavingPage, DashboardPage, HistorialPage, HomePage, LoginPage, RegisterPage, UserPage
 } from "./pages"
 import { AppContainer } from "./components/AppContainer/AppContainer"
 
@@ -15,7 +15,7 @@ export const App = () => {
       {/* Rutas privadas con menu lateral */}
       <Route element={<AppContainer />}>
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/ahorro" element={<AhorroPage />} />
+        <Route path="/ahorro" element={<SavingPage />} />
         <Route path="/historial" element={<HistorialPage />} />
         <Route path="/user" element={<UserPage />} />
       </Route>

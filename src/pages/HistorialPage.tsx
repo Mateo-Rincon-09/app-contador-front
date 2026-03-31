@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useMovimientosContext } from "../context/MovimientosContext";
 import { formatNum } from "../services/formatNum";
+import "../styles//historial.css";
+
 
 export const HistorialPage = () => {
   const { movimientoState, movimientoActions, movimientoRequestIsLoading } = useMovimientosContext();

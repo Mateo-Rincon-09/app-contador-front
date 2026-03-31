@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserContextProvider from "./UserContext";
 import MovimientosContextProvider from "./MovimientosContext";
+import SavingsContextProvider from "./SavingContext";
 
 const queryClient = new QueryClient();
 
@@ -9,7 +10,9 @@ export const ContextProviders = ({ children }: { children: React.ReactNode }) =>
     <QueryClientProvider client={queryClient}>
       <UserContextProvider>
         <MovimientosContextProvider>
-          {children}
+          <SavingsContextProvider>
+            {children}
+          </SavingsContextProvider>
         </MovimientosContextProvider>
       </UserContextProvider>
     </QueryClientProvider>

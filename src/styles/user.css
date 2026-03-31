@@ -1,0 +1,67 @@
+.user-dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+.user-sidebar {
+  width: 250px;
+  background-color: #1e293b;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 20px;
+}
+
+.user-logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.user-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user-nav-item {
+  text-decoration: none;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  transition: 0.25s;
+}
+
+.user-nav-item:hover {
+  background-color: #334155;
+}
+
+.user-logout {
+  text-decoration: none;
+  color: #f87171;
+  font-weight: 500;
+}
+
+.user-logout:hover {
+  text-decoration: underline;
+}
+
+.user-content {
+  flex: 1;
+  padding: 60px;
+  background-color: #f8fafc;
+}
+
+.user-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+.user-description {
+  font-size: 16px;
+  color: #475569;
+  max-width: 500px;
+  line-height: 1.6;
+}
