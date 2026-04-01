@@ -43,7 +43,7 @@ export const LoginPage = () => {
 
         <label>Email</label>
         <input
-          type="email"
+          type="text"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="tucorreo@gmail.com"
