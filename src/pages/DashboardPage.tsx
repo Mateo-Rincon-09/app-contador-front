@@ -17,9 +17,9 @@ interface MovimientoFormFields {
 
 export const DashboardPage = () => {
 
-  const[ movimientoFields, setMovimientoFields] = useState<MovimientoFormFields>({
+  const [movimientoFields, setMovimientoFields] = useState<MovimientoFormFields>({
     montoIngreso: 0,
-    montoGasto: 0, 
+    montoGasto: 0,
     categoria: "",
     descripcion: "",
     fecha: new Date()
@@ -29,7 +29,7 @@ export const DashboardPage = () => {
   const navigate = useNavigate();
 
   const movimientoMutation = useMutation({
-    mutationFn: (value: MovementRequest ) => movements(value),
+    mutationFn: (value: MovementRequest) => movements(value),
     onSuccess: (data) => {
       movimientoActions.addMovimiento(data.movement);
       navigate("/historial");
@@ -46,7 +46,7 @@ export const DashboardPage = () => {
     movimientoMutation.mutate({
       montoIngreso: movimientoFields.montoIngreso,
       montoGasto: movimientoFields.montoGasto,
-      categoria: movimientoFields.categoria,    
+      categoria: movimientoFields.categoria,
       descripcion: movimientoFields.descripcion,
       fecha: movimientoFields.fecha,
       currentPage: 1,
@@ -66,21 +66,18 @@ export const DashboardPage = () => {
         <input
           value={formatNum(movimientoFields.montoIngreso)}
           onChange={(event) => setMovimientoFields({ ...movimientoFields, montoIngreso: Number(event.target.value.replace(/\./g, "")) })}
-          required
         />
 
         <label>Monto Gasto (COP)</label>
         <input
           value={formatNum(movimientoFields.montoGasto)}
           onChange={(event) => setMovimientoFields({ ...movimientoFields, montoGasto: Number(event.target.value.replace(/\./g, "")) })}
-          required
         />
 
         <label>Categoria</label>
         <select
           value={movimientoFields.categoria}
-          onChange={(event) => setMovimientoFields({ ...movimientoFields , categoria: event.target.value})}
-          required
+          onChange={(event) => setMovimientoFields({ ...movimientoFields, categoria: event.target.value })}
         >
           <option value="" disabled>Tipo de gasto</option>
           <option value="arriendo">Arriendo</option>
@@ -98,16 +95,14 @@ export const DashboardPage = () => {
           type="text"
           placeholder="Descripción de gasto"
           value={movimientoFields.descripcion}
-          onChange={(event) => setMovimientoFields({ ...movimientoFields, descripcion: event.target.value})}
-          required
+          onChange={(event) => setMovimientoFields({ ...movimientoFields, descripcion: event.target.value })}
         />
 
         <label>Fecha</label>
         <input
           type="date"
           value={movimientoFields.fecha.toISOString().split("T")[0]} // Formatear fecha para input date
-          onChange={(event) => setMovimientoFields({ ...movimientoFields, fecha: new Date(event.target.value)})}
-          required
+          onChange={(event) => setMovimientoFields({ ...movimientoFields, fecha: new Date(event.target.value) })}
         />
 
         <button type="submit">Enviar</button>

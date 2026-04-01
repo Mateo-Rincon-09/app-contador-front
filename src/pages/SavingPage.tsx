@@ -38,7 +38,6 @@ export const SavingPage = () => {
                 <h2>Plan de ahorro</h2>
                 <label>Agrega el monto (COP)</label>
                 <input
-                    type="number"
                     value={formatNum(meta)}
                     onChange={(event) => {
                         const value = event.target.value.replace(/\./g, "")

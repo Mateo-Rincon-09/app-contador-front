@@ -37,7 +37,9 @@ export const HistorialPage = () => {
             </tr>
           </thead>
           <tbody>
-            {movimientos.map((movimiento) => (
+            {movimientos
+            .filter((movimiento) => movimiento != null)
+            .map((movimiento) => (
               <tr key={movimiento.id}>
                 <td>{new Date(movimiento.fecha).toLocaleDateString("es-CO")}</td>
                 <td>{movimiento.categoria}</td>

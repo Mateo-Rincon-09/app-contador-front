@@ -3,7 +3,7 @@ import "../styles/home.css";
 
 
 export const HomePage = () => {
- 
+
     return (
         <div>
             <header className="header-home">
@@ -11,6 +11,10 @@ export const HomePage = () => {
                     <Link to="/login">Iniciar sesion</Link>
                     <Link to="/register">Registrarse</Link>
                 </div>
+
+
+                <img src="logo.svg" />
+
             </header>
             <div className="body-container-home">
 
@@ -54,7 +58,7 @@ export const HomePage = () => {
                         </div>
                         <Link to="/register"><button className="button-home">Comenzar</button></Link>
                     </div>
-                    
+
                     <div className="plan-card-home">
                         <div className="plan-title-home">Plan Gratis</div>
                         <div className="plan-price-home">$0</div>

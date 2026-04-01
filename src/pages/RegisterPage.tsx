@@ -11,7 +11,7 @@ interface RegisterFormFields {
     lastName: string;
     email: string;
     password: string;
-    confirm: string;
+    confirmPassword: string;
     accept: boolean;
 }
 
@@ -22,7 +22,7 @@ export const RegisterPage = () => {
         lastName: "",
         email: "",
         password: "",
-        confirm: "",
+        confirmPassword: "",
         accept: false
     });
 
@@ -30,7 +30,7 @@ export const RegisterPage = () => {
     const navigate = useNavigate()
 
     const registerMutation = useMutation({
-        mutationFn: (value: AuthRegisterRequest) => registerAuth(value), 
+        mutationFn: (value: AuthRegisterRequest) => registerAuth(value),
         onSuccess: (data) => {
             userActions.loginUser(data.user, data.token)
             navigate("/user")
@@ -40,43 +40,41 @@ export const RegisterPage = () => {
         },
     })
 
-    const handleSubmit =  (event: React.SyntheticEvent) => {
+    const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
 
         registerMutation.mutate({
             name: userFields.name,
             email: userFields.email,
-            password: userFields.password
+            password: userFields.password,
+            confirmPassword: userFields.confirmPassword
         })
     }
 
     return (
         <div>
             <form onSubmit={handleSubmit} className="form">
-                <h2>Registarse</h2>
+                <h2>Registrate</h2>
 
                 <label>Name</label>
                 <input
-                    type="name"
+                    type="text"
                     value={userFields.name}
                     onChange={event => setUserFields({ ...userFields, name: event.target.value })}
-                    required
                 />
-                
-                
+
                 <label>Last Name</label>
                 <input
-                    type="lastName"
+                    type="text"
                     value={userFields.lastName}
                     onChange={event => setUserFields({ ...userFields, lastName: event.target.value })}
                 />
 
                 <label>Email</label>
                 <input
-                    type="email"
+                    type="text"
                     value={userFields.email}
                     onChange={event => setUserFields({ ...userFields, email: event.target.value })}
-                    required
                 />
 
                 <label>Password</label>
@@ -84,15 +82,13 @@ export const RegisterPage = () => {
                     type="password"
                     value={userFields.password}
                     onChange={event => setUserFields({ ...userFields, password: event.target.value })}
-                    required
                 />
 
                 <label>Confirm Password</label>
                 <input
                     type="password"
-                    value={userFields.confirm}
-                    onChange={event => setUserFields({ ...userFields, confirm: event.target.value })}
-                    required
+                    value={userFields.confirmPassword}
+                    onChange={event => setUserFields({ ...userFields, confirmPassword: event.target.value })}
                 />
 
                 <label>

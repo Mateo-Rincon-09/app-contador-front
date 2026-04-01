@@ -47,14 +47,12 @@ export const LoginPage = () => {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="tucorreo@gmail.com"
-          required
         />
         <label>Password</label>
         <input
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
-          required
         />
         <button type="submit">Iniciar sesion</button>
         <p>
