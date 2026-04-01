@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 
 type ErrorItem = {
   message?: string;
@@ -64,4 +65,10 @@ export const getServiceMessageError = (error: unknown): string => {
   }
 
   return "Hubo un error desconocido";
+};
+
+export const showServiceError = (error: unknown, title = "Error") => {
+  const message = getServiceMessageError(error);
+  toast.error(`${title}: ${message}`, { duration: 3000 });
+  return message;
 };

@@ -4,7 +4,7 @@ import { getStoredData, setStoredData } from "../services/localStorage.service";
 import { LocalStoreKeys } from '../enums/localStoreKeys.enum';
 import { useMutation } from "@tanstack/react-query";
 import { getSavings } from "../api/savings/savingsApi";
-import { getServiceMessageError } from "../services/errorHandler.service";
+import { showServiceError } from "../services/errorHandler.service";
 
 
 export interface ISavingState {
@@ -43,7 +43,7 @@ const SavingsContextProvider = ({ children }: { children: React.ReactNode }) => 
             setSavingState({ ...savingState, savings: data, isFetchDone: true })
         },
         onError: (error: unknown) => {
-            console.log(getServiceMessageError(error));
+            showServiceError(error, "Error al obtener ahorros");
             setSavingState({ ...savingState, savings: [], isFetchDone: true })
         }
     })

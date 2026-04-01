@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 import { useMutation } from "@tanstack/react-query";
 import { AuthLoginRequest, loginAuth } from "../api/auth/authApi";
+import { showServiceError } from "../services/errorHandler.service";
 import "../styles/login-register.css";
 
 
@@ -20,7 +21,7 @@ export const LoginPage = () => {
       navigate("/user");
     },
     onError: (error) => {
-      console.log(error);
+      showServiceError(error, "Error al iniciar sesión");
     }
   })
 

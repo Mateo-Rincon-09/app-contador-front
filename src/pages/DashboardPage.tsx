@@ -4,6 +4,7 @@ import { formatNum } from "../services/formatNum";
 import { useMutation } from "@tanstack/react-query";
 import { MovementRequest, movements } from "../api/movements/movementsApi";
 import { useMovimientosContext } from "../context/MovimientosContext";
+import { showServiceError } from "../services/errorHandler.service";
 import "../styles/dashboard-saving.css";
 
 interface MovimientoFormFields {
@@ -34,7 +35,7 @@ export const DashboardPage = () => {
       navigate("/historial");
     },
     onError: (error) => {
-      console.log("Error al agregar movimiento:", error);
+      showServiceError(error, "Error al agregar movimiento");
     },
   })
 

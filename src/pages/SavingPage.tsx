@@ -3,6 +3,7 @@ import { formatNum } from "../services/formatNum";
 import { useSavingsContext } from "../context/SavingContext";
 import { useMutation } from "@tanstack/react-query";
 import { SavingRequest, savings } from "../api/savings/savingsApi";
+import { showServiceError } from "../services/errorHandler.service";
 import "../styles/dashboard-saving.css";
 
 export const SavingPage = () => {
@@ -17,7 +18,7 @@ export const SavingPage = () => {
             savingActions.addSaving(data.saving);
         },
         onError: (error) => {
-            console.log(`Error al agregar movimiento ${error}`);
+            showServiceError(error, "Error al agregar ahorro");
         }
     })
 

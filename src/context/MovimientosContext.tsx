@@ -4,7 +4,7 @@ import { MovimientoInterface } from '../interface/movimiento.interface';
 import { getMovementsPagination } from "../api/movements/movementsApi";
 import { LocalStoreKeys } from "../enums/localStoreKeys.enum";
 import { getStoredData, setStoredData } from "../services/localStorage.service";
-import { getServiceMessageError } from "../services/errorHandler.service";
+import { showServiceError } from "../services/errorHandler.service";
 
 export interface IMovimientoState {
     isFetchDone?: boolean;
@@ -42,7 +42,7 @@ const MovimientosContextProvider = ({ children }: { children: React.ReactNode })
             setMovimientoState({ ...movimientoState, movimientos: data.items, isFetchDone: true });
         },
         onError: (error: unknown) => {
-            console.log(getServiceMessageError(error));
+            showServiceError(error, "Error al obtener movimientos");
             setMovimientoState({ ...movimientoState, movimientos: [], isFetchDone: true });
         },
     });

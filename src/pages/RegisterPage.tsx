@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthRegisterRequest, registerAuth } from "../api/auth/authApi"
 import { useMutation } from "@tanstack/react-query"
-import { getServiceMessageError } from "../services/errorHandler.service"
+import { showServiceError } from "../services/errorHandler.service"
 import { useUserContext } from "../context/UserContext"
 import "../styles/login-register.css";
 
@@ -36,7 +36,7 @@ export const RegisterPage = () => {
             navigate("/user")
         },
         onError: (error) => {
-            console.log("Error al registrar usuario:", getServiceMessageError(error));
+            showServiceError(error, "Error al registrar usuario");
         },
     })
 

@@ -5,7 +5,7 @@ import { getUserById } from "../api/user/userApi";
 import { LocalStoreKeys } from "../enums/localStoreKeys.enum";
 import { UserType } from "../enums/userType.enum";
 import { getStoredData, setStoredData } from "../services/localStorage.service";
-import { getServiceMessageError } from "../services/errorHandler.service";
+import { showServiceError } from "../services/errorHandler.service";
 
 export interface IUserState {
     isFetchDone?: boolean;
@@ -65,7 +65,7 @@ const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
             if (err?.response?.status === 401) {
                 authorized = false;
             } else {
-                console.log(getServiceMessageError(error));
+                showServiceError(error, "Error al cargar usuario");
             }
             setUserState({ ...userState, user: undefined, isFetchDone: true, authorized });
         },
