@@ -1,17 +1,23 @@
-import { SavingInterface } from "../../interface/saving.interface";
+import { SavingType } from "../../enums/savingType.enum";
+import { SavingInterface } from "../../interface/saving.intreface";
 import { savingEndpoint } from "../endpoints";
 import fetchApi from "../fetchApi";
 
 export interface SavingRequest {
-    montoMeta: number;
-    progreso?: number;
+    amount: number,
+    dateCreated: Date,
+    dateStart: Date,
+    dateEnd: Date,
+    status?: SavingType,
+    dateUpdated?: Date,
+    amountProgress?: number,
 }
 
 export interface SavingResponse {
     saving: SavingInterface;
 }
 
-export const savings = (request: SavingRequest): Promise <SavingResponse> => {
+export const savings = (request: SavingRequest): Promise<SavingResponse> => {
     return fetchApi.post(savingEndpoint.post.create, request).then((res) => res.data);
 }
 

@@ -22,22 +22,21 @@ export const userEndpoint = {
 };
 
 
-export const movimientoEndpoint = {
-    getById: (id: string) => `movements/${id}`,
-    getAll: "movements",
+export const transactionEndpoint = {
+    getById: (id: string) => `transaction/${id}`,
+    getAll: "transaction",
 
     post: {
-        create: "movements/create",
-        listMovements: "movements/list"
+        create: "transaction/create",
+        listTransaction: "transaction/list"
     },
     put: {
-        update: (id: string) => `movements/${id}`,
+        update: (id: string) => `transaction/${id}`,
     },
     delete: {
-        remove: (id: string) => `movements/${id}`,
+        remove: (id: string) => `transaction/${id}`,
     },
 };
-
 
 export const savingEndpoint = {
     getById: (id: string) => `saving/${id}`,
@@ -53,3 +52,19 @@ export const savingEndpoint = {
         remove: (id: string) => `saving/${id}`
     },
 }
+
+
+export const categoryEndpoint = {
+    getById: (id: string) => `category/${id}`,
+    getAll: "category",
+
+    post: {
+        create: "category/new"
+    },
+    put: {
+        update: (id: string) => `category/${id}`,
+    },
+    delete: {
+        remove: (id: string) => `category/${id}`,
+    },
+};

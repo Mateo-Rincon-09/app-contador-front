@@ -12,6 +12,7 @@ export interface AuthRegisterRequest {
     email: string;
     password: string;
     confirmPassword: string;
+    lastName?: string;
 }
 
 export interface AuthLoginRequest {

@@ -1,50 +1,55 @@
 form {
-  width: 380px;
+  width: 400px;
   margin: 80px auto;
-  padding: 35px;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px 35px 30px 35px;
+  background-color: #ffffff; 
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); 
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+  position: relative;
+  font-family: 'Inter', sans-serif;
 }
 
 form h2 {
   text-align: center;
-  margin-bottom: 15px;
-  color: #1e293b;
+  margin-bottom: 20px;
+  color: #111827; 
+  font-size: 24px;
+  font-weight: 700;
 }
 
 form label {
   font-size: 14px;
   font-weight: 600;
-  color: #334155;
+  color: #374151; 
 }
 
 form input {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 15px;
-  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db; 
+  font-size: 14px;
   transition: 0.2s;
 }
 
 form input:focus {
   outline: none;
-  border: 1px solid #1e293b;
-  box-shadow: 0px 0px 3px rgba(30, 41, 59, 0.3);
+  border-color: #0f766e; 
+  box-shadow: 0 0 5px rgba(15, 118, 110, 0.3);
 }
 
 form p {
   text-align: center;
-  margin-top: 5px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #6b7280; 
 }
 
 form a {
   text-decoration: none;
-  color: #2563eb;
+  color: #0f766e; 
   font-weight: 500;
 }
 
@@ -53,22 +58,48 @@ form a:hover {
 }
 
 form button {
-  margin-top: 15px;
+  margin-top: 20px;
   padding: 12px;
-  background-color: #1e293b;
+  background-color: #0f766e; 
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+  font-weight: 600;
   transition: 0.3s;
 }
 
 form button:hover {
-  background-color: #4d6379;
+  background-color: #115e59; 
 }
 
 form button:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
+.checkbox {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.back-home {
+  position: relative;
+  margin-bottom: 15px;
+  background: #e0f2f1; 
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #0f766e; 
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.2s;
+  align-self: flex-start;
+}
+
+.back-home:hover {
+  background: #b2dfdb; 
+  text-decoration: none;
+}

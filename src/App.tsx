@@ -15,7 +15,7 @@ export const App = () => {
       {/* Rutas privadas con menu lateral */}
       <Route element={<AppContainer />}>
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/ahorro" element={<SavingPage />} />
+        <Route path="/saving" element={<SavingPage />} />
         <Route path="/historial" element={<HistorialPage />} />
         <Route path="/user" element={<UserPage />} />
       </Route>

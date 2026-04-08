@@ -1,41 +1,37 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { formatNum } from "../services/formatNum";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { MovementRequest, movements } from "../api/movements/movementsApi";
-import { useMovimientosContext } from "../context/MovimientosContext";
+import { useTransactionContext } from "../context/TransactionContext";
+import { TransactionRequest, transactions } from "../api/transaction/transactionApi";
+import { formatNum } from "../services/formatNum";
 import { showServiceError } from "../services/errorHandler.service";
-import "../styles/dashboard-saving.css";
+import { TransactionType } from "../enums/transactionType.enum";
+import { TransactionModelImpl } from "../interface/transaction.interface";
+import "../styles/dashboard.css";
 
-interface MovimientoFormFields {
-  montoIngreso: number;
-  montoGasto: number;
-  categoria: string;
-  descripcion: string;
-  fecha: Date;
+
+interface TransactionFormFields {
+  amount: number;
+  description: string;
+  dateCreated: Date;
+  type: TransactionType;
 }
 
 export const DashboardPage = () => {
 
-  const [movimientoFields, setMovimientoFields] = useState<MovimientoFormFields>({
-    montoIngreso: 0,
-    montoGasto: 0,
-    categoria: "",
-    descripcion: "",
-    fecha: new Date()
-  });
+  const [transactionFields, setTransactionFields] = useState<TransactionFormFields>(new TransactionModelImpl(TransactionType.expense) );
 
-  const { movimientoActions } = useMovimientosContext();
+  const { transactionActions } = useTransactionContext();
   const navigate = useNavigate();
 
-  const movimientoMutation = useMutation({
-    mutationFn: (value: MovementRequest) => movements(value),
+  const transactionMutation = useMutation({
+    mutationFn: (value: TransactionRequest) => transactions(value),
     onSuccess: (data) => {
-      movimientoActions.addMovimiento(data.movement);
+      transactionActions.addTransaction(data.transaction);
       navigate("/historial");
     },
     onError: (error) => {
-      showServiceError(error, "Error al agregar movimiento");
+      showServiceError(error, "Error al agregar transacción");
     },
   })
 
@@ -43,16 +39,14 @@ export const DashboardPage = () => {
   const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    movimientoMutation.mutate({
-      montoIngreso: movimientoFields.montoIngreso,
-      montoGasto: movimientoFields.montoGasto,
-      categoria: movimientoFields.categoria,
-      descripcion: movimientoFields.descripcion,
-      fecha: movimientoFields.fecha,
+    transactionMutation.mutate({
+      amount: transactionFields.amount,
+      description: transactionFields.description,
+      dateCreated: transactionFields.dateCreated,
+      type: transactionFields.type,
       currentPage: 1,
-      pageSize: 20
+      pageSize: 20,
     })
-
 
   };
 
@@ -62,50 +56,44 @@ export const DashboardPage = () => {
       <form className="dashboard-form" onSubmit={handleSubmit}>
         <h2>Agregar movimiento</h2>
 
-        <label>Monto Ingreso (COP)</label>
-        <input
-          value={formatNum(movimientoFields.montoIngreso)}
-          onChange={(event) => setMovimientoFields({ ...movimientoFields, montoIngreso: Number(event.target.value.replace(/\./g, "")) })}
-        />
-
-        <label>Monto Gasto (COP)</label>
-        <input
-          value={formatNum(movimientoFields.montoGasto)}
-          onChange={(event) => setMovimientoFields({ ...movimientoFields, montoGasto: Number(event.target.value.replace(/\./g, "")) })}
-        />
-
-        <label>Categoria</label>
+       <label>Tipo de transacción</label>
         <select
-          value={movimientoFields.categoria}
-          onChange={(event) => setMovimientoFields({ ...movimientoFields, categoria: event.target.value })}
-        >
-          <option value="" disabled>Tipo de gasto</option>
-          <option value="arriendo">Arriendo</option>
-          <option value="mercado">Mercado</option>
-          <option value="transporte">Transporte</option>
-          <option value="nequi">Nequi</option>
-          <option value="colegio">Colegio</option>
-          <option value="salud">Salud</option>
-          <option value="deudas">Deudas</option>
-          <option value="diario">Diario</option>
+          value={transactionFields.type}
+          onChange={(event) => setTransactionFields({ ...transactionFields, type: event.target.value as TransactionType })}
+        > 
+          <option value="expense">Gasto</option>
+          <option value="income">Ingreso</option>
         </select>
 
-        <label>Descripcion</label>
+        <label>Monto (COP)</label>
+        <input
+          value={formatNum(transactionFields.amount)}
+          onChange={(event) => setTransactionFields({ ...transactionFields, amount: Number(event.target.value.replace(/\./g, "")) })}
+        />
+
+          {/* <label>Categoria</label>
+          <input
+            type="text"
+            // value={transactionFields}
+            // onChange={(event) => setTransactionFields({ ...transactionFields, description: event.target.value })}
+          /> */}
+
+        <label>Descripción</label>
         <input
           type="text"
           placeholder="Descripción de gasto"
-          value={movimientoFields.descripcion}
-          onChange={(event) => setMovimientoFields({ ...movimientoFields, descripcion: event.target.value })}
+          value={transactionFields.description}
+          onChange={(event) => setTransactionFields({ ...transactionFields, description: event.target.value })}
         />
 
         <label>Fecha</label>
         <input
           type="date"
-          value={movimientoFields.fecha.toISOString().split("T")[0]} // Formatear fecha para input date
-          onChange={(event) => setMovimientoFields({ ...movimientoFields, fecha: new Date(event.target.value) })}
+          value={transactionFields.dateCreated.toISOString().split("T")[0]} // Formatear fecha para input date
+          onChange={(event) => setTransactionFields({ ...transactionFields, dateCreated: new Date(event.target.value) })}
         />
 
-        <button type="submit">Enviar</button>
+        <button type="submit">Agregar</button>
 
       </form>
     </div>

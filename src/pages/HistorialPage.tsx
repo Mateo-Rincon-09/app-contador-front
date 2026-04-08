@@ -1,26 +1,26 @@
 import { useEffect } from "react";
-import { useMovimientosContext } from "../context/MovimientosContext";
+import { useTransactionContext } from "../context/TransactionContext";
 import { formatNum } from "../services/formatNum";
 import "../styles//historial.css";
 
 
 export const HistorialPage = () => {
-  const { movimientoState, movimientoActions, movimientoRequestIsLoading } = useMovimientosContext();
+  const { transactionState, transactionActions, transactionRequestIsLoading } = useTransactionContext();
 
   useEffect(() => {
-    movimientoActions.requestMovimientos();
+    transactionActions.requestTransactions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const movimientos = movimientoState.movimientos ?? [];
+  const transactions = transactionState.transactions ?? [];
 
   return (
     <div className="historial-container">
       <h1 className="historial-title">Historial de movimientos</h1>
 
-      {movimientoRequestIsLoading ? (
+      {transactionRequestIsLoading ? (
         <p className="historial-empty">Cargando movimientos...</p>
-      ) : movimientos.length === 0 ? (
+      ) : transactions.length === 0 ? (
         <div className="historial-empty">
           <p>No hay movimientos para mostrar.</p>
           <p>Agrega un movimiento para verlo aquí.</p>
@@ -30,22 +30,18 @@ export const HistorialPage = () => {
           <thead>
             <tr>
               <th>Fecha</th>
-              <th>Categoría</th>
               <th>Descripción</th>
-              <th>Ingreso</th>
               <th>Gasto</th>
             </tr>
           </thead>
           <tbody>
-            {movimientos
-            .filter((movimiento) => movimiento != null)
-            .map((movimiento) => (
-              <tr key={movimiento.id}>
-                <td>{new Date(movimiento.fecha).toLocaleDateString("es-CO")}</td>
-                <td>{movimiento.categoria}</td>
-                <td>{movimiento.descripcion}</td>
-                <td className="ingreso">{formatNum(movimiento.montoIngreso)}</td>
-                <td className="gasto">{formatNum(movimiento.montoGasto)}</td>
+            {transactions
+            .filter((transaction) => transaction != null)
+            .map((transaction) => (
+              <tr key={transaction.id}>
+                <td>{new Date(transaction.dateCreated).toLocaleDateString("es-CO")}</td>
+                <td>{transaction.description}</td>
+                <td className="ingreso">{formatNum(transaction.amount)}</td>
               </tr>
             ))}
           </tbody>

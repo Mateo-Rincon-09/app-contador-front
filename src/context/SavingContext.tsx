@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
-import { SavingInterface } from "../interface/saving.interface";
+import { SavingInterface } from "../interface/saving.intreface";
 import { getStoredData, setStoredData } from "../services/localStorage.service";
 import { LocalStoreKeys } from '../enums/localStoreKeys.enum';
 import { useMutation } from "@tanstack/react-query";
-import { getSavings } from "../api/savings/savingsApi";
+import { getSavings } from "../api/saving/savingApi";
 import { showServiceError } from "../services/errorHandler.service";
 
 
