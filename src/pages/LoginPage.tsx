@@ -38,7 +38,7 @@ export const LoginPage = () => {
 
   return (
     <div>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form-auth" onSubmit={handleSubmit}>
         <Link to="/" className="back-home">← Volver al inicio</Link>
         <h2>Iniciar sesión</h2>
 

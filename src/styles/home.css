@@ -13,8 +13,8 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-color: linear-gradient(135deg, #f8fafc, #eef2ff);
 }
-
 
 .header-home {
   height: 80px;
@@ -27,7 +27,6 @@
   padding: 0 60px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-
 
 .logo {
   display: flex;
@@ -55,7 +54,6 @@
   font-weight: 600;
   letter-spacing: 0.5px;
 }
-
 
 .nav-home {
   display: flex;
@@ -90,12 +88,10 @@
   width: 100%;
 }
 
-
 .header-actions {
   display: flex;
   gap: 15px;
 }
-
 
 .btn-login {
   color: #cbd5f5;
@@ -124,7 +120,6 @@
   box-shadow: 0px 8px 20px rgba(99,102,241,0.4);
 }
 
-
 .body-container-home {
   background: var(--bg);
   display: flex;
@@ -132,7 +127,6 @@
   gap: 80px;
   padding: 60px 20px;
 }
-
 
 .body-home {
   max-width: 1000px;
@@ -161,7 +155,6 @@
   color: #a5b4fc;
   font-weight: 600;
 }
-
 
 .planes-container-home {
   max-width: 1100px;
@@ -221,7 +214,6 @@
   background: var(--accent);
 }
 
-
 .feature-home {
   display: flex;
   justify-content: center;
@@ -256,7 +248,6 @@
   line-height: 1.8;
   margin-bottom: 10px;
 }
-
 
 .section-home {
   padding: 40px 20px;
@@ -335,7 +326,6 @@
   letter-spacing: 1px;
 }
 
-
 .section-stats {
   display: flex;
   gap: 20px;
@@ -349,7 +339,6 @@
   text-align: center;
 }
 
-
 .section-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -361,7 +350,6 @@
   padding: 25px;
   border-radius: 16px;
 }
-
 
 .footer-home {
   background: var(--primary);
@@ -387,7 +375,6 @@
   font-size: 12px;
   opacity: 0.7;
 }
-
 
 @keyframes fadeUp {
   from {
@@ -433,4 +420,3 @@
   color: var(--text-light);
   line-height: 1.6;
 }
-

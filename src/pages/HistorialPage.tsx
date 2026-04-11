@@ -31,7 +31,8 @@ export const HistorialPage = () => {
             <tr>
               <th>Fecha</th>
               <th>Descripción</th>
-              <th>Gasto</th>
+              <th>Monto</th>
+              <th>Tipo</th>
             </tr>
           </thead>
           <tbody>
@@ -42,6 +43,7 @@ export const HistorialPage = () => {
                 <td>{new Date(transaction.dateCreated).toLocaleDateString("es-CO")}</td>
                 <td>{transaction.description}</td>
                 <td className="ingreso">{formatNum(transaction.amount)}</td>
+                <td>{transaction.type}</td>
               </tr>
             ))}
           </tbody>

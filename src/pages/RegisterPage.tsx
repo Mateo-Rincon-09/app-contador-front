@@ -42,20 +42,23 @@ export const RegisterPage = () => {
 
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
+        if (userFields.password !== userFields.confirmPassword) {
+            showServiceError(new Error("Las contraseñas no coinciden"), "Error al registrar usuario");
+            return;
+        }
 
         registerMutation.mutate({
             name: userFields.name,
             lastName: userFields.lastName,
             email: userFields.email,
             password: userFields.password,
-            confirmPassword: userFields.confirmPassword,
         })
     }
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className="form">
-                <Link to="/" className="back-home">← Volver al inicio</Link>  
+            <form onSubmit={handleSubmit} className="form-auth">
+                <Link to="/" className="back-home">← Volver al inicio</Link>
                 <h2>Registrate</h2>
 
                 <label>Nombre</label>

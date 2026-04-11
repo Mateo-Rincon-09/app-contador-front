@@ -20,10 +20,11 @@
 
 .saving-title {
     grid-column: span 2;
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: 1.8rem; 
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 15px;
     color: #1a1a1a;
-    margin-bottom: 10px;
     animation: savingSlideDown 0.5s ease;
 }
 
@@ -60,7 +61,6 @@
 
 .saving-input:hover {
     border-color: #bfc3ff;
-    cursor: pointer;
 }
 
 .saving-input:focus {

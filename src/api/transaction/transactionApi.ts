@@ -6,10 +6,10 @@ import { IPaginationRequest, IPaginationResponse } from "../models";
 
 
 export interface TransactionRequest extends IPaginationRequest {
+    type: TransactionType;
     amount: number;
     description: string;
     dateCreated: Date;
-    type: TransactionType;
     dateUpdated?: Date;
 }
 

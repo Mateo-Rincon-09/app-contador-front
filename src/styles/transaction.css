@@ -19,7 +19,7 @@
 }
 
 .dashboard-form {
-  width: 550px;
+  width: 430px;
   padding: 32px;
   border-radius: 20px;
   background: white;
@@ -48,6 +48,7 @@
   font-weight: 700;
   color: #0f172a;
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .dashboard-form label {
@@ -84,6 +85,9 @@
 .dashboard-form input:hover,
 .dashboard-form select:hover {
   border-color: #c7d2fe;
+}
+
+.dashboard-form select:hover {
   cursor: pointer;
 }
 

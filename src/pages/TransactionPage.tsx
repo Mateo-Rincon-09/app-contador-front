@@ -7,19 +7,19 @@ import { formatNum } from "../services/formatNum";
 import { showServiceError } from "../services/errorHandler.service";
 import { TransactionType } from "../enums/transactionType.enum";
 import { TransactionModelImpl } from "../interface/transaction.interface";
-import "../styles/dashboard.css";
+import "../styles/transaction.css";
 
 
 interface TransactionFormFields {
+  type: TransactionType;
   amount: number;
   description: string;
   dateCreated: Date;
-  type: TransactionType;
 }
 
-export const DashboardPage = () => {
+export const TransactionPage = () => {
 
-  const [transactionFields, setTransactionFields] = useState<TransactionFormFields>(new TransactionModelImpl(TransactionType.expense) );
+  const [transactionFields, setTransactionFields] = useState<TransactionFormFields>(new TransactionModelImpl(TransactionType.expense));
 
   const { transactionActions } = useTransactionContext();
   const navigate = useNavigate();
@@ -40,10 +40,10 @@ export const DashboardPage = () => {
     event.preventDefault();
 
     transactionMutation.mutate({
+      type: transactionFields.type,
       amount: transactionFields.amount,
       description: transactionFields.description,
       dateCreated: transactionFields.dateCreated,
-      type: transactionFields.type,
       currentPage: 1,
       pageSize: 20,
     })
@@ -56,11 +56,11 @@ export const DashboardPage = () => {
       <form className="dashboard-form" onSubmit={handleSubmit}>
         <h2>Agregar movimiento</h2>
 
-       <label>Tipo de transacción</label>
+        <label>¿Que deseas registrar?</label>
         <select
           value={transactionFields.type}
           onChange={(event) => setTransactionFields({ ...transactionFields, type: event.target.value as TransactionType })}
-        > 
+        >
           <option value="expense">Gasto</option>
           <option value="income">Ingreso</option>
         </select>
@@ -71,11 +71,11 @@ export const DashboardPage = () => {
           onChange={(event) => setTransactionFields({ ...transactionFields, amount: Number(event.target.value.replace(/\./g, "")) })}
         />
 
-          {/* <label>Categoria</label>
+        {/* <label>Categoria</label>
           <input
             type="text"
-            // value={transactionFields}
-            // onChange={(event) => setTransactionFields({ ...transactionFields, description: event.target.value })}
+            value={transactionFields.category}
+            onChange={(event) => setTransactionFields({ ...transactionFields, category: event.target.value })}
           /> */}
 
         <label>Descripción</label>

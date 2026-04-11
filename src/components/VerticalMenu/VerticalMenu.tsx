@@ -1,8 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
 import { FiHome, FiBarChart2, FiClipboard, FiUser, FiLogOut } from "react-icons/fi";
-import "./VerticalMenu.css";
 import { JSX } from "react";
+import { confirmLogout, showLogoutSuccess } from "../../utils/utils";
+import "./VerticalMenu.css";
 
 interface MenuItem {
     label: string;
@@ -11,7 +12,7 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-    { label: "Agregar", path: "/dashboard", icon: <FiHome /> },
+    { label: "Agregar", path: "/transaction", icon: <FiHome /> },
     { label: "Ahorro", path: "/saving", icon: <FiBarChart2 /> },
     { label: "Historial", path: "/historial", icon: <FiClipboard /> },
     { label: "Perfil", path: "/user", icon: <FiUser /> },
@@ -21,9 +22,15 @@ export const VerticalMenu = () => {
     const { userActions } = useUserContext();
     const navigate = useNavigate();
 
-    const onClick = () => {
+    const onClick = async () => {
+        const confirmed = await confirmLogout();
+        if (!confirmed) return;
+
         userActions.logOut();
-        navigate("/");
+        
+        await showLogoutSuccess();
+
+        navigate("/login");
     };
 
     return (
